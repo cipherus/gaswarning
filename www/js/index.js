@@ -85,6 +85,77 @@ function addDev(device) {
 				// For easy access.
 				activeSensor = newDiv;
 				
+				//Hide picture
+					Highcharts.chart('container', {
+					    chart: {
+					        type: 'column'
+					    },
+					    title: {
+					        text: 'Concentration of harmful gases'
+					    },
+					    
+					    xAxis: {
+					        
+					        crosshair: true
+					    },
+					    yAxis: {
+					        min: 0,
+					        title: {
+					            text: 'Concentration (ppm)'
+					        }
+					    },
+					    tooltip: {
+					       
+					        shared: true,
+					        useHTML: true
+					    },
+					    plotOptions: {
+					        column: {
+					            pointPadding: 0.2,
+					            borderWidth: 0,
+					   } },
+					    
+					    series: [{
+					        name: 'CO',
+					        data: [0.5],
+					        zones: [{
+					         value: 30,
+					         color: '#7cb5ec'
+					      		}, {
+					      	 value: 
+					         color: '#f7a35c'
+					     	}, {
+					     		//DANGER
+					     	}] }, 
+					    	{
+					        name: 'NH3',
+					        data: [1],
+					        zones: [{
+					          value: 20,
+					          color: '#7cb5ec'
+					          }, {
+					          value:  ,
+					          color: '#f7a35c'
+					     	 }, {
+					     	 	//DANGER
+					   		}]}, 
+					      {
+					        name: 'NO2',
+					        data: [2],
+					        zones: [{
+					          value: 0.5,
+					          color: '#7cb5ec'
+					          }, {
+					          value:  ,
+					          color: '#f7a35c'
+					      	  },{
+					      	  	//Sort of Danger
+					    	}]}
+					      ]
+					});
+
+				
+
 				// Disable scan button and connect.
 				$("#scanButton").switchClass("ui-enabled", "ui-disabled");
 				ble.connect(device.id, connectSuccess, connectFailure);
@@ -144,7 +215,15 @@ function connectSuccess(peripheral) {
 	// Start notifications for temperature, humidity and pressure.	
 	ble.startNotification(connectedDevice.id, ENV_SERVICE, ENV_TEMP, notifyTEMP, notificationFailure);	
 	ble.startNotification(connectedDevice.id, ENV_SERVICE, ENV_HUM, notifyHUM, notificationFailure);	
-	ble.startNotification(connectedDevice.id, ENV_SERVICE, ENV_PRESS, notifyPRESS, notificationFailure);	
+	ble.startNotification(connectedDevice.id, ENV_SERVICE, ENV_PRESS, notifyPRESS, notificationFailure);
+
+	// Start notifications for CO, NO2 and NH3	
+	ble.startNotification(connectedDevice.id, GAS_SERVICE, GAS_CO_RAW, notifyCO_RAW, notificationFailure);
+	ble.startNotification(connectedDevice.id, GAS_SERVICE, GAS_CO_CALIB, notifyCO_CALIB, notificationFailure);
+	ble.startNotification(connectedDevice.id, GAS_SERVICE, GAS_NO2_RAW, notifyNO2_RAW, notificationFailure);
+	ble.startNotification(connectedDevice.id, GAS_SERVICE, GAS_NO2_CALIB, notifyNO2_CALIB, notificationFailure);
+	ble.startNotification(connectedDevice.id, GAS_SERVICE, GAS_NH3_RAW, notifyNH3_RAW, notificationFailure);
+	ble.startNotification(connectedDevice.id, GAS_SERVICE, GAS_NH3_CALIB, notifyNH3_CALIB, notificationFailure);
 }
 
 // Callback when notification request fails.
@@ -159,15 +238,56 @@ function notifyTEMP(buffer) {
 	activeSensor.find("#deviceInfo").html("Temperature: " + floatVal + "°C");
 }
 
-function notifyHUM(buffer) {
-	var value = new Uint16Array(buffer);
+
+function notifyCO_RAW(buffer) {
+	var value = new Int16Array(buffer);
 	var floatVal = value[0] / 100.0;
-	activeSensor.find("#deviceInfo2").html("Humidity: " + floatVal + "%");
+	activeSensor.find("#deviceInfo").html("Temperature: " + floatVal + "°C");
+}
+function notifyCO_CALIB(buffer) {
+	var value = new Int16Array(buffer);
+	var floatVal = value[0] / 100.0;
+	activeSensor.find("#deviceInfo").html("Temperature: " + floatVal + "°C");
 }
 
-function notifyPRESS(buffer) {
-	var value = new Uint32Array(buffer);
-	var floatVal = value[0] / 10.0;
-	activeSensor.find("#deviceInfo3").html("Pressure: " + floatVal + " Pa");
+function notifyNO2_RAW(buffer) {
+	var value = new Int16Array(buffer);
+	var floatVal = value[0] / 100.0;
+	activeSensor.find("#deviceInfo").html("Temperature: " + floatVal + "°C");
 }
+
+function notifyNO2_CALIB(buffer) {
+	var value = new Int16Array(buffer);
+	var floatVal = value[0] / 100.0;
+	activeSensor.find("#deviceInfo").html("Temperature: " + floatVal + "°C");
+}
+
+function notifyNH3_RAW(buffer) {
+	var value = new Int16Array(buffer);
+	var floatVal = value[0] / 100.0;
+	activeSensor.find("#deviceInfo").html("Temperature: " + floatVal + "°C");
+}
+function notifyNH3_CALIB(buffer) {
+	var value = new Int16Array(buffer);
+	var floatVal = value[0] / 100.0;
+	activeSensor.find("#deviceInfo").html("Temperature: " + floatVal + "°C");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
