@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>BLE Sensor Reader V1.0</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="utf-8"/>
+
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="jqm/jquery.mobile-1.4.5.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/custom.css" />
+
+		<style>
+			/* Prevent FOUC */
+			body { opacity: 0; }
+		</style>
+
+	</head>
+	<body>
+
+	<!-- Center page. Show splash screen in here. -->
+	<div data-role="page">
+		<div id='splash_icon_middle'>
+			<img class='mid' id='image_middle' src='ble_icon.png' />
+			<div class='mid' id='appname'>BLE Cloud</div>
+		</div>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="jqm/jquery.mobile-1.4.5.min.js"></script>
+	<script src="vendor/waves/waves.min.js"></script>
+	<script src="vendor/wow/wow.min.js"></script>
+	<script src="js/nativedroid2.js"></script>
+	<script src="nd2settings.js"></script>
+	<script src="js/jquery.textilate.js"></script>
+	<script src="js/jquery.lettering-0.6.1.min.js"></script>
+		
+	<script>
+	// Anim: Float up, fade in.
+	$("#splash_icon_middle")
+	    .animate({
+	        top: "41%"
+	    }, {
+	        queue: false,
+	        duration: 1300
+	    })
+	    .animate({
+	        opacity: "1.0"
+	    }, 1500);
+
+	// Anim: Float up, fade out.
+	setTimeout(function() {
+	    $("#splash_icon_middle")
+	        .animate({
+	            top: "21%"
+	        }, {
+	            queue: false,
+	            duration: 1300
+	        })
+	        .animate({
+	            opacity: "0.0"
+	        }, 500)
+	}, 6000);
+
+	// Redirect after animation.
+	setTimeout(function() {
+	    window.location.href = "main.html";
+	}, 7000);
+
+	// Anim: Flip text in/out using textillate library.
+	$('#appname').textillate({
+
+	    initialDelay: 500,
+
+	    in: {
+	        effect: 'flipInY',
+	        delayScale: 1.5,
+	        delay: 50,
+	    },
+
+	    out: {
+	        effect: 'flipOutY',
+	        delayScale: 1.5,
+	        delay: 50,
+	        callback: function() {
+	            $('#test').destroy();
+	        }
+	    },
+
+	    loop: true
+	});
+	
+	</script>
+	
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>		
+	
+	</body>
+</html>

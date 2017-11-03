@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>TECO BLE Cloud</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="utf-8"/>
+		
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="jqm/jquery.mobile-1.4.5.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="vendor/chartist/style.css" />
+		
+		<style>
+			/* Prevent FOUC */
+			body { opacity: 0; }
+		</style>
+
+	</head>
+	<body>
+
+	<!-- Center page for content. -->
+	<div data-role="page">
+
+		<!-- Include side panel using nativedroid2. Panel content is located in "panel.left.html" -->
+		<nd2-include data-src="panel.left.html"></nd2-include>
+
+		<!-- Header with open/close button for side panel. -->
+		<div data-role="header" data-position="fixed" class="wow fadeIn">
+			<a href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'><i class="zmdi zmdi-menu"></i></a>
+			<h1 class="wow fadeIn" data-wow-delay='0.4s'>TECO BLE Cloud</h1>
+		</div>
+				
+		<!-- List view with example entry (template) for BLE device. This example entry is invisible. Once needed, it is duplicated, given proper content and then made visible. -->
+		<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+			<ul id="deviceList" data-role="listview" data-icon="false">
+				<li id='deviceItem' style='display:none' class='deviceItemTemplate wow fadeIn' data-wow-delay="0.1s">
+					<a href="#">
+						<img id='deviceImg' src="img/ble_dev.jpg" class="ui-thumbnail ui-thumbnail-circular" />
+						<h2 id='deviceName'>TECO Smart Air Sensor</h2>
+						<p id='deviceInfo' style="white-space: initial !important; word-wrap:break-word !important;">You can connect to this sensor!</p>
+						<p id='deviceInfo2' style="white-space: initial !important; word-wrap:break-word !important;"></p>
+						<p id='deviceInfo3' style="white-space: initial !important; word-wrap:break-word !important;"></p>
+						<p id='deviceRSSI' class="pull-right">RSSI: </p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- Button styled as Floating Action Button. -->
+		<button id="scanButton" data-wow-delay='0.9s' style="position: absolute !important; bottom: 20px; right: 20px;" onclick="startBLEScan();" class="wow fadeIn pull-right ui-btn ui-btn-inline ui-btn-fab ui-mini ui-btn-raised clr-warning ui-enabled"><i class="zmdi zmdi-bluetooth-search zmd-3x"></i></button>
+	
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="jqm/jquery.mobile-1.4.5.min.js"></script>
+	<script src="vendor/waves/waves.min.js"></script>
+	<script src="vendor/wow/wow.min.js"></script>
+	<script src="vendor/chartist/chartist.min.js"></script>
+	<script src="js/nativedroid2.js"></script>
+	<script src="nd2settings.js"></script>
+	<script src="js/index.js"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>	
+	
+	</body>
+</html>
